@@ -1,3 +1,7 @@
+# v1.0.4
+ * Fix memory management issues preventing the mod from working on Windows
+ * Temporarily remove iOS builds until a solution for the folder picker crash is found
+
 # v1.0.3
  * Fix _massive_ oversights with the positioning of certain triggers
 
