@@ -20,7 +20,7 @@ using namespace geode::prelude;
 std::string buildObjectString(Level inLevel)
 {
     gdObj tempGD;
-    BlockObject tempIG;
+    BlockObject* tempIG;
     bool isPit = false;
     std::string result = level_string_base;
 
@@ -28,7 +28,7 @@ std::string buildObjectString(Level inLevel)
     {
         tempIG = inLevel.getBlockAtIndex(i);
         
-        switch(tempIG.objType)
+        switch(tempIG->objType)
         {
             case 0:
                 tempGD.p1_id = "1";
@@ -44,8 +44,8 @@ std::string buildObjectString(Level inLevel)
 
         if(!isPit)
         {
-            tempGD.p2_x = std::to_string(tempIG.xPos - 135);
-            tempGD.p3_y = std::to_string(tempIG.yPos + 15);
+            tempGD.p2_x = std::to_string(tempIG->xPos - 135);
+            tempGD.p3_y = std::to_string(tempIG->yPos + 15);
             tempGD.p21_colorID = "0";
             tempGD.p24_zLayer = "0";
             result += "1,";
@@ -62,8 +62,8 @@ std::string buildObjectString(Level inLevel)
         }
         else
         {
-            int iterations = round((tempIG.yPos - tempIG.xPos)/30) + 1;
-            int currentX = (tempIG.xPos - 135);
+            int iterations = round((tempIG->yPos - tempIG->xPos)/30) + 1;
+            int currentX = (tempIG->xPos - 135);
             for(int j = 0; j < iterations; j++)
             {
                 result += "1,";
@@ -84,14 +84,14 @@ std::string buildObjectString(Level inLevel)
         isPit = false;
     }
 
-    BackgroundChange tempBC;
+    BackgroundChange* tempBC;
     gdColorTrigger tempCT;
 
     for(int i = 0; i < inLevel.getBackgroundCount(); i++)
     {
         tempBC = inLevel.getBackgroundAtIndex(i);
 
-        switch(tempBC.colorID)
+        switch(tempBC->colorID)
         {
             case 0:
                 //blue
@@ -131,7 +131,7 @@ std::string buildObjectString(Level inLevel)
                 break;
         }
         //this is a fucking awful way to do it but the weirdness of GD has forced my hand
-        tempCT.p2_x = std::to_string(tempBC.xPos + 165);
+        tempCT.p2_x = std::to_string(tempBC->xPos + 165);
         tempCT.p3_y = std::to_string(3000);
         tempCT.p23_channel = std::to_string(1000);
         result += "1,";
@@ -153,7 +153,7 @@ std::string buildObjectString(Level inLevel)
         result += tempCT.remainder;
         result += ";";
 
-        tempCT.p2_x = std::to_string(tempBC.xPos + 165);
+        tempCT.p2_x = std::to_string(tempBC->xPos + 165);
         tempCT.p3_y = std::to_string(3030);
         tempCT.p23_channel = std::to_string(1001);
         result += "1,";
@@ -175,7 +175,7 @@ std::string buildObjectString(Level inLevel)
         result += tempCT.remainder;
         result += ";";
 
-        tempCT.p2_x = std::to_string(tempBC.xPos + 165);
+        tempCT.p2_x = std::to_string(tempBC->xPos + 165);
         tempCT.p3_y = std::to_string(3060);
         tempCT.p23_channel = std::to_string(1009); //wtf
         result += "1,";
@@ -199,7 +199,7 @@ std::string buildObjectString(Level inLevel)
     }
 
 
-    GravityChange tempGC;
+    GravityChange* tempGC;
     gdMirrorPortal tempMP;
     gdCameraObj tempCO;
     bool currentlyInverted = false;
@@ -221,8 +221,8 @@ std::string buildObjectString(Level inLevel)
 
         currentlyInverted = !currentlyInverted;
 
-        tempMP.xpos = std::to_string(tempGC.xPos + 165);
-        tempCO.xpos = std::to_string(tempGC.xPos + 165);
+        tempMP.xpos = std::to_string(tempGC->xPos + 165);
+        tempCO.xpos = std::to_string(tempGC->xPos + 165);
 
         result += tempMP.base;
         result += tempMP.objID;
@@ -245,8 +245,7 @@ std::string buildObjectString(Level inLevel)
     {
         tempBR = inLevel.getRisingAtIndex(i);
 
-        //tempGBR.xpos = std::to_string(tempBR.startX - 135);
-        tempGBR.xpos = std::to_string(tempBR.startX - 465);
+        tempGBR.xpos = std::to_string(tempBR->startX - 465);
 
         tempGBR.id = "23";
 
@@ -257,14 +256,13 @@ std::string buildObjectString(Level inLevel)
         result += tempGBR.remainder;
         result += ";";
 
-        if(tempBR.startX == tempBR.endX)
+        if(tempBR->startX == tempBR->endX)
         {
             tempGBR.xpos = std::to_string(inLevel.getEndPos() - 495);
         }
         else
         {
-            //tempGBR.xpos = std::to_string(tempBR.endX - 135);
-            tempGBR.xpos = std::to_string(tempBR.endX - 495);
+            tempGBR.xpos = std::to_string(tempBR->endX - 495);
         }
         
         tempGBR.id = "1915";
@@ -277,14 +275,14 @@ std::string buildObjectString(Level inLevel)
         result += ";";
     }
 
-    BlocksFall tempBF;
+    BlocksFall* tempBF;
     gdBlocksFall tempGBF;
 
     for(int i = 0; i < inLevel.getFallingCount(); i++)
     {
         tempBF = inLevel.getFallingAtIndex(i);
 
-        tempGBF.xpos = std::to_string(tempBF.startX - 135);
+        tempGBF.xpos = std::to_string(tempBF->startX - 135);
         tempGBF.id = "23";
 
         result += tempGBF.base;
@@ -294,13 +292,13 @@ std::string buildObjectString(Level inLevel)
         result += tempGBF.remainder;
         result += ";";
 
-        if(tempBF.startX == tempBF.endX)
+        if(tempBF->startX == tempBF->endX)
         {
             tempGBF.xpos = std::to_string(inLevel.getEndPos() - 15);
         }
         else
         {
-            tempGBF.xpos = std::to_string(tempBF.endX - 15);
+            tempGBF.xpos = std::to_string(tempBF->endX - 15);
         }
 
         tempGBF.id = "1915";
