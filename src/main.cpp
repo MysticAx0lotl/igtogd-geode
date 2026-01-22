@@ -320,7 +320,7 @@ static auto IMPORT_PICK_OPTIONS = file::FilePickOptions {
     {
         {
             "Impossible Game Level Files",
-            { "*.lvl" }
+            { "*.dat" }
         }
     }
 };
@@ -336,7 +336,7 @@ struct $modify(ImportLayer, LevelBrowserLayer) {
 
         if(igLevel.getBlockCount() == 0 && igLevel.getBackgroundCount() == 0 && igLevel.getEndPos() == 3015)
         {
-            FLAlertLayer::create("Load Error", "This is most likely not a valid Impossible Game level folder", "OK")->show();
+            FLAlertLayer::create("Load Error", "This is most likely not a valid Impossible Game level file", "OK")->show();
         }
         else if (igLevel.getLoadedSuccessfully() == false)
         {
@@ -375,7 +375,7 @@ struct $modify(ImportLayer, LevelBrowserLayer) {
                 }
             }
         });
-        m_fields->pickListener.setFilter(file::pick(file::PickMode::OpenFolder, IMPORT_PICK_OPTIONS));
+        m_fields->pickListener.setFilter(file::pick(file::PickMode::OpenFile, IMPORT_PICK_OPTIONS));
     }
 
     $override

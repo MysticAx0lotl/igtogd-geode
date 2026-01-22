@@ -37,7 +37,7 @@ struct gdMirrorPortal
     std::string objID = "45"; //45 = mirror start, 46 = mirror end
     std::string middle = ",2,";
     std::string xpos = "15";
-    std::string remainder = ",3,45,135,1,155,2,36,1";
+    std::string remainder = ",3,45,135,1,155,2,36,1,116,1";
 };
 
 struct gdBlocksRise
