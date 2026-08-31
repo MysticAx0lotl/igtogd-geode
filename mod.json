@@ -1,12 +1,13 @@
 {
-    "geode": "4.7.0",
-	"gd": {
-		"win": "2.2074",
-        "mac": "2.2074",
-        "android": "2.2074"
-	},
-	"version": "1.0.4",
-	"id": "mysticaxolotl.ig2gd",
+    "geode": "5.10.1",
+    "gd": {
+        "win": "2.2081",
+        "mac": "2.2081",
+        "android": "2.2081",
+        "ios": "2.2081"
+    },
+    "version": "1.0.5",
+    "id": "mysticaxolotl.ig2gd",
     "name": "TIG2GD",
     "developer": "MysticAxolotl",
     "description": "Import levels from The Impossible Game into Geometry Dash",
@@ -17,13 +18,9 @@
             ]
         }
     },
-    "dependencies": [
-        {
-            "id": "geode.node-ids",
-            "version": "1.12.0",
-            "importance": "required"
-        }
-    ],
+    "dependencies": {
+        "geode.node-ids": ">=1.23.3"
+    },
     "links": {
         "source": "https://github.com/MysticAx0lotl/igtogd-geode"
     },

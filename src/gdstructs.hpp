@@ -1,61 +1,95 @@
-#ifndef GD_STRUCTS
-#define GD_STRUCTS
+#pragma once
 
-struct gdObj
+#include <string>
+#include <string_view>
+
+struct BlockObject
 {
-    std::string p1_id = "1"; //block is default, can be changed to spike or pit
-    std::string p2_x = "0";
-    std::string p3_y = "0";
-    std::string p21_colorID = "0";
-    std::string p24_zLayer = "0";
+    int xPosition = 0;
+    int yPosition = 0; // serves as endX position for pit objects
+    int objectType = 0;
+    int vectorIndex = 0;
 };
 
-struct gdColorTrigger
+struct BackgroundChange
 {
-    std::string p1_id = "899";
-    std::string p2_x = "0";
-    std::string p3_y = "0";
-    std::string p7_red = "0";
-    std::string p8_green = "0";
-    std::string p9_blue = "0";
-    std::string p10_duration = "0.25";
-    std::string p23_channel = "1000";
-    std::string remainder = ",155,1,35,1";
+    int xPosition = 0;
+    int colorID = 0;
+    std::string colorName;
+    bool hasCustomTexture = false;
+    std::string filePath;
 };
 
-struct gdCameraObj
+struct GravityChange
 {
-    std::string base = "1,2015,2,";
-    std::string xpos = "0";
-    std::string middle = ",3,2970,155,2,36,1,85,2,68,";
-    std::string rotation = "180";
+    int xPosition = 0;
 };
 
-struct gdMirrorPortal
+struct BlocksRiseTrigger
 {
-    std::string base = "1,";
-    std::string objID = "45"; //45 = mirror start, 46 = mirror end
-    std::string middle = ",2,";
-    std::string xpos = "15";
-    std::string remainder = ",3,45,135,1,155,2,36,1,116,1";
+    int startXPosition = 0;
+    int endXPosition = 0;
 };
 
-struct gdBlocksRise
+struct BlocksFallTrigger
 {
-    std::string base = "1,";
-    std::string id = "23"; //set to 1915 for endBlocksRise
-    std::string middle = ",2,";
-    std::string xpos = "15";
-    std::string remainder = ",3,2940,155,1,36,1,217,1";
+    int startXPosition = 0;
+    int endXPosition = 0;
 };
 
-struct gdBlocksFall
+struct GDObjectData
 {
-    std::string base = "1,";
-    std::string id = "23"; //set to 1915 for endBlocksFall
-    std::string middle = ",2,";
-    std::string xpos = "15";
-    std::string remainder = ",3,2910,155,1,36,1,217,2";
+    std::string_view objectID = "1"; // default block; altered for spikes/pits
+    std::string_view xPosition = "0";
+    std::string_view yPosition = "0";
+    std::string_view colorChannelID = "0";
+    std::string_view zLayer = "0";
 };
 
-#endif
+struct GDColorTriggerData
+{
+    std::string_view objectID = "899";
+    std::string_view xPosition = "0";
+    std::string_view yPosition = "0";
+    std::string_view redValue = "0";
+    std::string_view greenValue = "0";
+    std::string_view blueValue = "0";
+    std::string_view fadeDuration = "0.25";
+    std::string_view targetChannel = "1000";
+    std::string_view stringRemainder = ",155,1,35,1";
+};
+
+struct GDCameraObjectData
+{
+    std::string_view stringPrefix = "1,2015,2,";
+    std::string_view xPosition = "0";
+    std::string_view stringMiddle = ",3,2970,155,2,36,1,85,2,68,";
+    std::string_view rotationDegrees = "180";
+};
+
+struct GDMirrorPortalData
+{
+    std::string_view stringPrefix = "1,";
+    std::string_view objectID = "45"; // 45: enable mirror, 46: disable mirror
+    std::string_view stringMiddle = ",2,";
+    std::string_view xPosition = "15";
+    std::string_view stringRemainder = ",3,45,135,1,155,2,36,1,116,1";
+};
+
+struct GDRisingBlocksData
+{
+    std::string_view stringPrefix = "1,";
+    std::string_view triggerID = "23"; // 23: start rising, 1915: end rising
+    std::string_view stringMiddle = ",2,";
+    std::string_view xPosition = "15";
+    std::string_view stringRemainder = ",3,2940,155,1,36,1,217,1";
+};
+
+struct GDFallingBlocksData
+{
+    std::string_view stringPrefix = "1,";
+    std::string_view triggerID = "23"; // s3: Start falling, 1915: end falling
+    std::string_view stringMiddle = ",2,";
+    std::string_view xPosition = "15";
+    std::string_view stringRemainder = ",3,2910,155,1,36,1,217,2";
+};
