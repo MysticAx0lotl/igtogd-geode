@@ -80,7 +80,7 @@ struct GDRisingBlocksData
 struct GDFallingBlocksData
 {
     std::string_view stringPrefix = "1,";
-    std::string_view triggerID = "24"; // 24: Start falling, 1915: end falling
+    std::string_view triggerID = "23"; // 23: Start falling, 1915: end falling
     std::string_view stringMiddle = ",2,";
     std::string_view xPosition = "15";
     std::string_view stringRemainder = ",3,2910,155,1,36,1,217,2";
