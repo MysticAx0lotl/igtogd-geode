@@ -59,22 +59,14 @@ struct GDColorTriggerData
     std::string_view stringRemainder = ",155,1,35,1";
 };
 
-struct GDCameraObjectData
+struct GDSplitScreenObjectData
 {
-    std::string_view stringPrefix = "1,2015,2,";
+    std::string_view stringPrefix = "1,2924,2,";
     std::string_view xPosition = "0";
-    std::string_view stringMiddle = ",3,2970,155,2,36,1,85,2,68,";
-    std::string_view rotationDegrees = "180";
-};
-
-struct GDMirrorPortalData
-{
-    std::string_view stringPrefix = "1,";
-    std::string_view objectID = "45"; // 45: enable mirror, 46: disable mirror
-    std::string_view stringMiddle = ",2,";
-    std::string_view xPosition = "15";
-    std::string_view stringRemainder = ",3,45,135,1,155,2,36,1,116,1";
-};
+    std::string_view stringMiddle = ",3,2970,155,1,36,1,175,1,176,1,191,1,179,1,189,";
+    std::string_view yFlip = "0";
+    std::string_view stringRemainder = ",181,1,182,1,190,1,10,0.2,85,2;";
+}
 
 struct GDRisingBlocksData
 {
@@ -88,7 +80,7 @@ struct GDRisingBlocksData
 struct GDFallingBlocksData
 {
     std::string_view stringPrefix = "1,";
-    std::string_view triggerID = "23"; // s3: Start falling, 1915: end falling
+    std::string_view triggerID = "24"; // 24: Start falling, 1915: end falling
     std::string_view stringMiddle = ",2,";
     std::string_view xPosition = "15";
     std::string_view stringRemainder = ",3,2910,155,1,36,1,217,2";

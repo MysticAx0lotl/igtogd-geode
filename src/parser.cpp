@@ -10,8 +10,7 @@
 
 using namespace geode::prelude;
 
-static constexpr GDMirrorPortalData kMPData{};
-static constexpr GDCameraObjectData kCOData{};
+static constexpr GDSplitScreenObjectData kSSOData{};
 static constexpr GDRisingBlocksData kGRBData{};
 static constexpr GDFallingBlocksData kGBFData{};
 
@@ -317,7 +316,7 @@ static Result<void> appendBackgrounds(const Level& level, std::string& outResult
     return Ok();
 }
 
-static void appendPortalsAndMovement(const Level& level, std::string& outResult)
+static void appendCameraFlip(const Level& level, std::string& outResult)
 {
     constexpr int kOffsetX135 = 135;
     constexpr int kOffsetX165 = 165;
@@ -328,23 +327,18 @@ static void appendPortalsAndMovement(const Level& level, std::string& outResult)
     bool currentlyInverted = false;
     for (const auto& grav : level.getGravity())
     {
-        std::string_view objID = currentlyInverted ? "46" : "45";
-        std::string_view rotationDegrees = currentlyInverted ? "0" : "180";
+        std::string_view yFlip = currentlyInverted ? "-2" : "0";
         currentlyInverted = !currentlyInverted;
 
         int xPosition = grav.xPosition + kOffsetX165;
         fmt::format_to(
             std::back_inserter(outResult),
-            "{}{}{}{}{};{}{}{}{};",
-            kMPData.stringPrefix,
-            objID,
-            kMPData.stringMiddle,
+            "{}{}{}{}{};",
+            kSSOData.stringPrefix,
             xPosition,
-            kMPData.stringRemainder,
-            kCOData.stringPrefix,
-            xPosition,
-            kCOData.stringMiddle,
-            rotationDegrees
+            kSSOData.stringMiddle,
+            yFlip,
+            kSSOData.stringRemainder
         );
     }
 
@@ -407,7 +401,7 @@ Result<std::string> Level::buildObjectString(const Level& inLevel)
     GEODE_UNWRAP(appendBlocks(inLevel, result));
     GEODE_UNWRAP(appendBackgrounds(inLevel, result));
 
-    appendPortalsAndMovement(inLevel, result);
+    appendCameraFlip(inLevel, result);
 
     return Ok(std::move(result));
 }

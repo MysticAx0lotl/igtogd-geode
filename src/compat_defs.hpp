@@ -24,6 +24,7 @@ enum class GDObjectID : uint16_t
     ShrinkEnter = 27,
     GrowEnter = 28,
     ColorTrigger = 29
+    SplitShader = 2924
 };
 
 namespace Colors
