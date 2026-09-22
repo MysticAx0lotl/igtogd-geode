@@ -370,7 +370,7 @@ static void appendCameraFlip(const Level& level, std::string& outResult)
 
         fmt::format_to(
             std::back_inserter(outResult),
-            "{}23{}{}{};{}1915{}{}{};",
+            "{}24{}{}{};{}1915{}{}{};",
             kGBFData.stringPrefix,
             kGBFData.stringMiddle,
             startXPos,
