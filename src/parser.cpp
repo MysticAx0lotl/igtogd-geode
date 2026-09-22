@@ -192,8 +192,8 @@ Result<void> Level::load(const asp::fs::path& path)
     GEODE_UNWRAP_INTO(m_endPos, readInt(data, offset));
     GEODE_UNWRAP(parseBackgrounds(data, offset));
     GEODE_UNWRAP(parseGravity(data, offset));
-    GEODE_UNWRAP(parseRising(data, offset));
     GEODE_UNWRAP(parseFalling(data, offset));
+    GEODE_UNWRAP(parseRising(data, offset));
 
     m_loaded = true;
     return Ok();
@@ -327,7 +327,7 @@ static void appendCameraFlip(const Level& level, std::string& outResult)
     bool currentlyInverted = false;
     for (const auto& grav : level.getGravity())
     {
-        std::string_view yFlip = currentlyInverted ? "-2" : "0";
+        std::string_view yFlip = currentlyInverted ? "0" : "-2";
         currentlyInverted = !currentlyInverted;
 
         int xPosition = grav.xPosition + kOffsetX165;
