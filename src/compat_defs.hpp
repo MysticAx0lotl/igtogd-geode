@@ -23,7 +23,7 @@ enum class GDObjectID : uint16_t
     EnterLeft = 26,
     ShrinkEnter = 27,
     GrowEnter = 28,
-    ColorTrigger = 29
+    ColorTrigger = 29,
     SplitShader = 2924
 };
 
