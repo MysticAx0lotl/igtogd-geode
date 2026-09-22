@@ -66,7 +66,7 @@ struct GDSplitScreenObjectData
     std::string_view stringMiddle = ",3,2970,155,1,36,1,175,1,176,1,191,1,179,1,189,";
     std::string_view yFlip = "0";
     std::string_view stringRemainder = ",181,1,182,1,190,1,10,0.2,85,2;";
-}
+};
 
 struct GDRisingBlocksData
 {
